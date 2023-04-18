@@ -77,6 +77,7 @@ const Login = ({navigation}) => {
       // Navigate to the main screen
       setIsAuthenticated(true);
       console.log('Succesful');
+      navigation.navigate('tabNavigation');
     } catch (error) {
       // Display the actual error message
       alert(error.message);
