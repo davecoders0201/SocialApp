@@ -3,6 +3,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NavigationContainer} from '@react-navigation/native';
 import 'react-native-gesture-handler';
 import Login from './screen/components/Login';
+import Reg from './screen/components/Reg';
 
 // Create a Reference of the Stack which will display in the screen stack wise
 const Stack = createNativeStackNavigator();
@@ -18,6 +19,7 @@ class App extends React.Component {
             headerShown: false,
           }}>
           <Stack.Screen name="Login" component={Login}></Stack.Screen>
+          <Stack.Screen name="Reg" component={Reg}></Stack.Screen>
         </Stack.Navigator>
       </NavigationContainer>
     );
