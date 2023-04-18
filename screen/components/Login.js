@@ -165,7 +165,7 @@ const Login = ({navigation}) => {
           New Here ?{' '}
           <Text
             style={styles.registerTextStyle}
-            onPress={() => navigation.navigate('Registration')}>
+            onPress={() => navigation.navigate('Reg')}>
             Register
           </Text>
         </Text>
@@ -198,7 +198,7 @@ const styles = StyleSheet.create({
   },
   inputView: {
     backgroundColor: 'transparent',
-    borderWidth: 2,
+    borderWidth: 1,
     borderColor: 'black',
     borderRadius: 30,
     width: '70%',
