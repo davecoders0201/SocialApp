@@ -1,28 +1,24 @@
-import * as React from 'react';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import React from 'react';
+import {createStackNavigator} from '@react-navigation/stack';
 import {NavigationContainer} from '@react-navigation/native';
-import 'react-native-gesture-handler';
 import Login from './screen/components/Login';
 import Reg from './screen/components/Reg';
+import TabNavigation from './navigation/tabNavigation';
 
 // Create a Reference of the Stack which will display in the screen stack wise
-const Stack = createNativeStackNavigator();
+const Stack = createStackNavigator();
 
 // This is the Class Which extends the React Components
 // and Render function is the Compulsary in the React.Components class
-class App extends React.Component {
-  render() {
-    return (
-      <NavigationContainer>
-        <Stack.Navigator
-          screenOptions={{
-            headerShown: false,
-          }}>
-          <Stack.Screen name="Login" component={Login}></Stack.Screen>
-          <Stack.Screen name="Reg" component={Reg}></Stack.Screen>
-        </Stack.Navigator>
-      </NavigationContainer>
-    );
-  }
+function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator screenOptions={{headerShown: false}}>
+        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="Reg" component={Reg} />
+        <Stack.Screen name="tabNavigation" component={TabNavigation} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
 }
 export default App;
