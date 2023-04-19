@@ -9,9 +9,16 @@ import {
 import React, {useState} from 'react';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import storage from '@react-native-firebase/storage';
+import Home from './Home';
+import Search from './Search';
+import Add from './Add';
+import Chat from './Chat';
+import Profile from './Profile';
 const NavigationScreen = ({navigation}) => {
   const [imageData, setImageData] = useState(null);
   const [imageUrl, setImageUrl] = useState();
+  const [selectedTab, setSelectedTab] = useState(0);
+
   const openCamera = async () => {
     const result = await launchCamera({mediaType: 'photo'});
     setImageData(result);
@@ -45,35 +52,76 @@ const NavigationScreen = ({navigation}) => {
   };
   return (
     <View style={styles.mainContainer}>
+      {selectedTab === 0 ? (
+        <Home />
+      ) : selectedTab === 1 ? (
+        <Search />
+      ) : selectedTab === 2 ? (
+        <Add />
+      ) : selectedTab === 3 ? (
+        <Chat />
+      ) : (
+        <Profile />
+      )}
       <View style={styles.container}>
-        <TouchableOpacity style={styles.navigationButton}>
+        <TouchableOpacity
+          style={styles.navigationButton}
+          onPress={() => setSelectedTab(0)}>
           <Image
             source={require('../../asset/home.png')}
-            style={styles.navigationImage}
+            style={{
+              width: 25,
+              height: 25,
+              tintColor: selectedTab === 0 ? 'red' : '#8e8e8e',
+            }}
           />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.navigationButton}>
+        <TouchableOpacity
+          style={styles.navigationButton}
+          onPress={() => setSelectedTab(1)}>
           <Image
             source={require('../../asset/search.png')}
-            style={styles.navigationImage}
+            style={{
+              width: 25,
+              height: 25,
+              tintColor: selectedTab === 1 ? 'red' : '#8e8e8e',
+            }}
           />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.navigationButton}>
+        <TouchableOpacity
+          style={styles.navigationButton}
+          onPress={() => setSelectedTab(2)}>
           <Image
             source={require('../../asset/add.png')}
-            style={styles.navigationImage}
+            style={{
+              width: 25,
+              height: 25,
+              tintColor: selectedTab === 2 ? 'red' : '#8e8e8e',
+            }}
           />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.navigationButton}>
+        <TouchableOpacity
+          style={styles.navigationButton}
+          onPress={() => setSelectedTab(3)}>
           <Image
             source={require('../../asset/chat.png')}
-            style={styles.navigationImage}
+            style={{
+              width: 25,
+              height: 25,
+              tintColor: selectedTab === 3 ? 'red' : '#8e8e8e',
+            }}
           />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.navigationButton}>
+        <TouchableOpacity
+          style={styles.navigationButton}
+          onPress={() => setSelectedTab(4)}>
           <Image
             source={require('../../asset/profile.png')}
-            style={styles.navigationImage}
+            style={{
+              width: 25,
+              height: 25,
+              tintColor: selectedTab === 4 ? 'red' : '#8e8e8e',
+            }}
           />
         </TouchableOpacity>
       </View>
@@ -102,9 +150,5 @@ const styles = StyleSheet.create({
     height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  navigationImage: {
-    width: 25,
-    height: 25,
   },
 });
