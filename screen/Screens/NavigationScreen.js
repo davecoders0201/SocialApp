@@ -7,49 +7,53 @@ import {
   View,
 } from 'react-native';
 import React, {useState} from 'react';
-import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
-import storage from '@react-native-firebase/storage';
+
+// This is the import of the lauchCamera and launchImageLibrary
+// import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
+// import storage from '@react-native-firebase/storage';
 import Home from './Home';
 import Search from './Search';
 import Add from './Add';
 import Chat from './Chat';
 import Profile from './Profile';
 const NavigationScreen = ({navigation}) => {
-  const [imageData, setImageData] = useState(null);
-  const [imageUrl, setImageUrl] = useState();
   const [selectedTab, setSelectedTab] = useState(0);
 
-  const openCamera = async () => {
-    const result = await launchCamera({mediaType: 'photo'});
-    setImageData(result);
-    console.log(result);
-  };
+  // This is the OpenCamera and uploadPhoto to the Database Function
+  // const [imageData, setImageData] = useState(null);
+  // const [imageUrl, setImageUrl] = useState();
 
-  const requestPermission = async () => {
-    try {
-      const granted = await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.CAMERA,
-      );
-      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-        openCamera();
-      } else {
-        console.log('camera permission denied');
-      }
-    } catch (err) {
-      console.warn(err);
-    }
-  };
-  const uploadImage = async () => {
-    const reference = storage().ref(imageData.assets[0].fileName);
-    const pathToFile = imageData.assets[0].uri;
-    // uploads file
-    await reference.putFile(pathToFile);
-    const url = await storage()
-      .ref(imageData.assets[0].fileName)
-      .getDownloadURL();
-    console.log('Image uploaded to database');
-    console.log(url);
-  };
+  // const openCamera = async () => {
+  //   const result = await launchCamera({mediaType: 'photo'});
+  //   setImageData(result);
+  //   console.log(result);
+  // };
+
+  // const requestPermission = async () => {
+  //   try {
+  //     const granted = await PermissionsAndroid.request(
+  //       PermissionsAndroid.PERMISSIONS.CAMERA,
+  //     );
+  //     if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+  //       openCamera();
+  //     } else {
+  //       console.log('camera permission denied');
+  //     }
+  //   } catch (err) {
+  //     console.warn(err);
+  //   }
+  // };
+  // const uploadImage = async () => {
+  //   const reference = storage().ref(imageData.assets[0].fileName);
+  //   const pathToFile = imageData.assets[0].uri;
+  //   // uploads file
+  //   await reference.putFile(pathToFile);
+  //   const url = await storage()
+  //     .ref(imageData.assets[0].fileName)
+  //     .getDownloadURL();
+  //   console.log('Image uploaded to database');
+  //   console.log(url);
+  // };
   return (
     <View style={styles.mainContainer}>
       {selectedTab === 0 ? (
