@@ -5,9 +5,6 @@ const Home = ({navigation}) => {
   return (
     <View>
       <Text>Home</Text>
-      <TouchableOpacity onPress={() => navigation.navigate('test')}>
-        <Text>Click here</Text>
-      </TouchableOpacity>
     </View>
   );
 };
