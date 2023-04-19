@@ -77,7 +77,7 @@ const Login = ({navigation}) => {
       // Navigate to the main screen
       setIsAuthenticated(true);
       console.log('Succesful');
-      navigation.navigate('Home');
+      navigation.navigate('NavigationScreen');
     } catch (error) {
       // Display the actual error message
       alert(error.message);
@@ -157,7 +157,7 @@ const Login = ({navigation}) => {
         <TouchableOpacity>
           <Text
             style={styles.forgot_button}
-            onPress={() => navigation.navigate('Home')}>
+            onPress={() => navigation.navigate('NavigationScreen')}>
             Forgot Password?
           </Text>
         </TouchableOpacity>
