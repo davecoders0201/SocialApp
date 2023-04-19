@@ -3,7 +3,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {NavigationContainer} from '@react-navigation/native';
 import Login from './screen/components/Login';
 import Reg from './screen/components/Reg';
-import Home from './screen/Screens/Home';
+import NavigationScreen from './screen/Screens/NavigationScreen';
 
 // Create a Reference of the Stack which will display in the screen stack wise
 const Stack = createStackNavigator();
@@ -16,7 +16,7 @@ function App() {
       <Stack.Navigator screenOptions={{headerShown: false}}>
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Reg" component={Reg} />
-        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="NavigationScreen" component={NavigationScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
