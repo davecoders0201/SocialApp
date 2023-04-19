@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {View, Text} from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import Home from './../screen/Screens/Home';
+import {View, Text, Image, StyleSheet, BlurView} from 'react-native';
+import Home from '../screen/Screens/Home';
+import Account from './../screen/Screens/Account';
 const TabNavigation = () => {
   const Tab = createBottomTabNavigator();
 
@@ -10,7 +10,10 @@ const TabNavigation = () => {
     <Tab.Navigator
       screenOptions={{
         tabBarShowLabel: false,
-        tabBarActiveTintColor: '#02c3d9',
+        headerShown: false,
+        tabBarActiveTintColor: 'white',
+        tabBarActiveBackgroundColor: 'lightgrey',
+        tabBarLabelStyle: {fontWeight: 'bold', color: 'black'},
       }}
       initialRouteName="login">
       <Tab.Screen
@@ -18,12 +21,31 @@ const TabNavigation = () => {
         component={Home}
         options={{
           tabBarIcon: ({color, size}) => (
-            <Icon name="home-lock" color={color} size={size} />
+            <Image source={require('../asset/home.png')} style={styles.Icon} />
           ),
         }}
+      />
+      <Tab.Screen
+        name="test"
+        component={Account}
+        // options={{
+        //   tabBarIcon: ({color, size}) => (
+        //     <Image
+        //       source={require('../asset/branch.png')}
+        //       style={styles.Icon}
+        //     />
+        //   ),
+        // }}
       />
     </Tab.Navigator>
   );
 };
 
 export default TabNavigation;
+
+const styles = StyleSheet.create({
+  Icon: {
+    width: 32,
+    height: 30,
+  },
+});
