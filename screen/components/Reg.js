@@ -163,7 +163,7 @@ const Reg = ({navigation}) => {
     <View style={styles.container}>
       {/* ---------------This is the Image Tag which is use for the Image-------------------- */}
       <Image
-        source={require('../../asset/Logo.png')}
+        source={require('../../asset/Logo1.png')}
         style={styles.image}></Image>
 
       {/* ---------------------------This is the Name Input--------------------------------- */}
@@ -313,10 +313,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   image: {
-    // marginTop: -100,
-    marginBottom: 30,
-    height: 300,
-    width: 300,
+    marginTop: -200,
+    // marginBottom: 30,
+    height: 500,
+    width: 500,
     borderRadius: 25,
     justifyContent: 'center',
     alignItems: 'center',

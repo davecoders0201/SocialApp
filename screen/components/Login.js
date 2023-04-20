@@ -138,7 +138,7 @@ const Login = ({navigation}) => {
       <View style={styles.container}>
         {/* ---------------------Image Logo----------------- */}
         <Image
-          source={require('../../asset/Logo.png')}
+          source={require('../../asset/Logo1.png')}
           style={styles.image}></Image>
 
         {/* ---------------------Email View----------------- */}
@@ -228,10 +228,9 @@ const styles = StyleSheet.create({
     width,
   },
   image: {
-    marginTop: -50,
-    marginBottom: 30,
-    height: 350,
-    width: 350,
+    marginTop: -200,
+    height: 500,
+    width: 500,
     borderRadius: 25,
     justifyContent: 'center',
     alignItems: 'center',
