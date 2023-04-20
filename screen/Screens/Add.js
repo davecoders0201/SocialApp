@@ -5,13 +5,17 @@ import {
   TouchableOpacity,
   Image,
   TextInput,
+  Alert,
 } from 'react-native';
 import React, {useState, useEffect} from 'react';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import storage from '@react-native-firebase/storage';
 import firestore from '@react-native-firebase/firestore';
 import messaging from '@react-native-firebase/messaging';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 let token = '';
+let email = '';
+let name = '';
 const Add = () => {
   const [imageData, setImageData] = useState(null);
   const [imageUrl, setImageUrl] = useState();
@@ -22,7 +26,11 @@ const Add = () => {
   }, []);
   const getFcmToken = async () => {
     token = await messaging().getToken();
+    email = await AsyncStorage.getItem('EMAIL');
+    name = await AsyncStorage.getItem('NAME');
     console.log(token);
+    console.log(name);
+    console.log(email);
   };
   const openCamera = async () => {
     const result = await launchCamera({mediaType: 'photo'});
@@ -51,24 +59,11 @@ const Add = () => {
       .add({
         image: url,
         caption: caption,
+        email: email,
+        name: name,
       })
       .then(() => {
         console.log('Post Added');
-      });
-
-    firestore()
-      .collection('Posts')
-      .get()
-      .then(querySnapshot => {
-        console.log('Total Posts: ', querySnapshot.size);
-
-        querySnapshot.forEach(documentSnapshot => {
-          console.log(
-            'User ID: ',
-            documentSnapshot.id,
-            documentSnapshot.data(),
-          );
-        });
       });
   };
 
@@ -82,8 +77,10 @@ const Add = () => {
             {color: imageData !== null ? 'blue' : '#8e8e8e'},
           ]}
           onPress={() => {
-            if (imageData !== null) {
+            if (imageData !== null && caption !== '') {
               uploadImage();
+            } else {
+              Alert.alert('Please select Pic or enter Caption');
             }
           }}>
           Upload
