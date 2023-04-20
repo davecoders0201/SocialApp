@@ -6,15 +6,24 @@ import {
   Image,
   TextInput,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import storage from '@react-native-firebase/storage';
 import firestore from '@react-native-firebase/firestore';
-
+import messaging from '@react-native-firebase/messaging';
+let token = '';
 const Add = () => {
   const [imageData, setImageData] = useState(null);
   const [imageUrl, setImageUrl] = useState();
+  const [caption, setCaption] = useState('');
 
+  useEffect(() => {
+    getFcmToken();
+  }, []);
+  const getFcmToken = async () => {
+    token = await messaging().getToken();
+    console.log(token);
+  };
   const openCamera = async () => {
     const result = await launchCamera({mediaType: 'photo'});
     setImageData(result);
@@ -41,6 +50,7 @@ const Add = () => {
       .collection('Posts')
       .add({
         image: url,
+        caption: caption,
       })
       .then(() => {
         console.log('Post Added');
@@ -92,6 +102,10 @@ const Add = () => {
           />
         )}
         <TextInput
+          value={caption}
+          onChangeText={txt => {
+            setCaption(txt);
+          }}
           placeholder="type caption here..."
           style={styles.captionStyle}></TextInput>
       </View>
