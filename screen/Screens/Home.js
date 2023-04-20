@@ -1,12 +1,26 @@
-import {FlatList, StyleSheet, Text, View, Image} from 'react-native';
+import {
+  FlatList,
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import firestore from '@react-native-firebase/firestore';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Home = () => {
+  const [onLickClick, setOnLikeClick] = useState(false);
   const [postData, setPostData] = useState([]);
   useEffect(() => {
+    getUserId();
     getData();
-  });
+  }, [onLickClick]);
+
+  const getUserId = async () => {
+    userId = await AsyncStorage.getItem('USERID');
+  };
   const getData = () => {
     let tempData = [];
     firestore()
@@ -17,14 +31,53 @@ const Home = () => {
 
         querySnapshot.forEach(documentSnapshot => {
           tempData.push(documentSnapshot.data());
-          console.log(
-            'User ID: ',
-            documentSnapshot.id,
-            documentSnapshot.data(),
-          );
         });
         setPostData(tempData);
       });
+  };
+
+  const getLikeStatus = likes => {
+    let status = false;
+    likes.map(item => {
+      if (item === userId) {
+        status = true;
+      } else {
+        status = false;
+      }
+    });
+    return status;
+  };
+
+  const onLike = item => {
+    let tempLikes = item.likes;
+    if (tempLikes.length > 0) {
+      tempLikes.map(item1 => {
+        if (item1 === userId) {
+          const index = tempLikes.indexOf(item1);
+          if (index > -1) {
+            tempLikes.splice(index, 1);
+          }
+        } else {
+          tempLikes.push(userId);
+        }
+      });
+    } else {
+      tempLikes.push(userId);
+    }
+
+    firestore()
+      .collection('Posts')
+      .doc(item.postId)
+      .update({
+        likes: tempLikes,
+      })
+      .then(() => {
+        console.log('Post updated');
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    setOnLikeClick(!onLickClick);
   };
 
   return (
@@ -38,7 +91,11 @@ const Home = () => {
           data={postData}
           renderItem={({item, index}) => {
             return (
-              <View style={styles.flatListPost}>
+              <View
+                style={[
+                  styles.flatListPost,
+                  {marginBottom: postData.length - 1 === index ? 80 : 0},
+                ]}>
                 {/* <Image source={{uri: item.image}} style={styles.imagePost} /> */}
                 <View style={styles.userContainer}>
                   <Image
@@ -49,6 +106,33 @@ const Home = () => {
                 </View>
                 <Text style={styles.captionText}>{item.caption}</Text>
                 <Image source={{uri: item.image}} style={styles.imagePost} />
+                <View style={styles.likeCommentButtonContainer}>
+                  <TouchableOpacity
+                    style={styles.likeCommentButton}
+                    onPress={() => {
+                      onLike(item);
+                    }}>
+                    <Text style={styles.likeCommentButtonText}>{'0'}</Text>
+                    {getLikeStatus(item.likes) ? (
+                      <Image
+                        source={require('../../asset/love.png')}
+                        style={styles.loveCommentIcon}
+                      />
+                    ) : (
+                      <Image
+                        source={require('../../asset/heart.png')}
+                        style={styles.loveCommentIcon}
+                      />
+                    )}
+                  </TouchableOpacity>
+                  <TouchableOpacity style={styles.likeCommentButton}>
+                    <Text style={styles.likeCommentButtonText}>{'0'}</Text>
+                    <Image
+                      source={require('../../asset/comment.png')}
+                      style={styles.loveCommentIcon}
+                    />
+                  </TouchableOpacity>
+                </View>
               </View>
             );
           }}
@@ -116,6 +200,24 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     marginRight: 20,
     marginBottom: 10,
+  },
+  likeCommentButtonContainer: {
+    flexDirection: 'row',
+    width: '100%',
+    height: 50,
+    marginBottom: 10,
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
+  },
+  likeCommentButton: {
+    flexDirection: 'row',
+  },
+  likeCommentButtonText: {
+    marginRight: 10,
+  },
+  loveCommentIcon: {
+    width: 24,
+    height: 24,
   },
   postNotFound: {
     flex: 1,
