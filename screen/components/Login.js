@@ -113,7 +113,7 @@ const Login = ({navigation}) => {
                 ' ' +
                 querySnapshot.docs[0]._data.password,
             );
-            navigation.navigate('NavigationScreen');
+            goToHome(querySnapshot.docs[0]._data.userId);
             emailInputRef.current.clear();
             passwordInputRef.current.clear();
           } else {
@@ -128,6 +128,10 @@ const Login = ({navigation}) => {
       });
   };
 
+  const goToHome = async userId => {
+    await AsyncStorage.setItem('USERID', userId);
+    navigation.navigate('NavigationScreen');
+  };
   return (
     <AuthContext.Provider value={{isAuthenticated, setIsAuthenticated}}>
       {/* ---------------------Main View----------------- */}

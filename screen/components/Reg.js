@@ -11,6 +11,7 @@ import {
 import firestore from '@react-native-firebase/firestore';
 import messaging from '@react-native-firebase/messaging';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import uuid from 'react-native-uuid';
 let token = '';
 
 const Reg = ({navigation}) => {
@@ -122,6 +123,7 @@ const Reg = ({navigation}) => {
         password: password,
         reenterpassword: reenterpassword,
         token: token,
+        userId: uuid.v4(),
       })
       .then(() => {
         console.log('User Added');
