@@ -13,6 +13,7 @@ import storage from '@react-native-firebase/storage';
 import firestore from '@react-native-firebase/firestore';
 import messaging from '@react-native-firebase/messaging';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import uuid from 'react-native-uuid';
 let token = '';
 let email = '';
 let name = '';
@@ -45,8 +46,10 @@ const Add = () => {
   };
 
   const uploadImage = async () => {
+    let id = uuid.v4();
     const reference = storage().ref(imageData.assets[0].fileName);
     const pathToFile = imageData.assets[0].uri;
+    const userId = await AsyncStorage.getItem('USERID');
     // uploads file
     await reference.putFile(pathToFile);
     const url = await storage()
@@ -56,11 +59,16 @@ const Add = () => {
     console.log(url);
     firestore()
       .collection('Posts')
-      .add({
+      .doc(id)
+      .set({
         image: url,
         caption: caption,
         email: email,
         name: name,
+        userId: userId,
+        postId: id,
+        likes: [],
+        comments: [],
       })
       .then(() => {
         console.log('Post Added');
