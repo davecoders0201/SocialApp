@@ -7,12 +7,15 @@ import {
   TouchableOpacity,
   Image,
   Dimensions,
+  Alert,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // This is the Authentication Import from the package
 // the Installation command is npm install @react-native-firebase/auth
-import auth from '@react-native-firebase/auth';
+// import auth from '@react-native-firebase/auth';
+
+import firestore from '@react-native-firebase/firestore';
 const AuthContext = React.createContext();
 const {width, height} = Dimensions.get('window');
 
@@ -48,49 +51,81 @@ const Login = ({navigation}) => {
   const handleLogin = async () => {
     // Validate inputs
     if (!email.trim()) {
-      alert('Please enter your email');
+      Alert.alert('Please enter your email');
       return;
     }
     if (!password.trim()) {
-      alert('Please enter your password');
+      Alert.alert('Please enter your password');
       return;
     }
 
-    try {
-      // Try to log in the user
-      const isUserLogin = await auth().signInWithEmailAndPassword(
-        email,
-        password,
-      );
+    // This uses a Simple Authentication in the Firebase
+    // try {
+    //   // Try to log in the user
+    //   const isUserLogin = await auth().signInWithEmailAndPassword(
+    //     email,
+    //     password,
+    //   );
 
-      // Save or remove credentials based on "Remember me" checkbox
-      if (isSelected) {
-        await AsyncStorage.setItem('email', email);
-        await AsyncStorage.setItem('password', password);
-      } else {
-        await AsyncStorage.removeItem('email');
-        await AsyncStorage.removeItem('password');
-        emailInputRef.current.clear();
-        passwordInputRef.current.clear();
-      }
+    //   // Save or remove credentials based on "Remember me" checkbox
+    //   if (isSelected) {
+    //     await AsyncStorage.setItem('email', email);
+    //     await AsyncStorage.setItem('password', password);
+    //   } else {
+    //     await AsyncStorage.removeItem('email');
+    //     await AsyncStorage.removeItem('password');
+    // emailInputRef.current.clear();
+    // passwordInputRef.current.clear();
+    //   }
 
-      // Navigate to the main screen
-      setIsAuthenticated(true);
-      console.log('Succesful');
-      navigation.navigate('NavigationScreen');
-    } catch (error) {
-      // Display the actual error message
-      alert(error.message);
+    //   // Navigate to the main screen
+    //   setIsAuthenticated(true);
+    //   console.log('Succesful');
+    //   navigation.navigate('NavigationScreen');
+    // } catch (error) {
+    //   // Display the actual error message
+    //   alert(error.message);
 
-      // Clear input fields only if necessary
-      if (
-        error.code === 'auth/invalid-email' ||
-        error.code === 'auth/wrong-password'
-      ) {
-        // emailInputRef.current.clear();
-        // passwordInputRef.current.clear();
-      }
-    }
+    //   // Clear input fields only if necessary
+    //   if (
+    //     error.code === 'auth/invalid-email' ||
+    //     error.code === 'auth/wrong-password'
+    //   ) {
+    //     // emailInputRef.current.clear();
+    //     // passwordInputRef.current.clear();
+    //   }
+    // }
+
+    firestore()
+      .collection('Users')
+      .where('email', '==', email)
+      .get()
+      .then(querySnapshot => {
+        if (querySnapshot.docs.length > 0) {
+          if (
+            querySnapshot.docs[0]._data.email === email &&
+            querySnapshot.docs[0]._data.password === password
+          ) {
+            Alert.alert('user logged in successfully');
+            console.log(querySnapshot.docs);
+            console.log(
+              querySnapshot.docs[0]._data.email +
+                ' ' +
+                querySnapshot.docs[0]._data.password,
+            );
+            navigation.navigate('NavigationScreen');
+            emailInputRef.current.clear();
+            passwordInputRef.current.clear();
+          } else {
+            Alert.alert('email id or password may wrong');
+          }
+        } else {
+          console.log('Account not found');
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      });
   };
 
   return (

@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import {
   StyleSheet,
   Text,
@@ -7,68 +7,79 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
-import auth from '@react-native-firebase/auth';
+// import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
+import messaging from '@react-native-firebase/messaging';
+let token = '';
 
 const Reg = ({navigation}) => {
+  useEffect(() => {
+    getFcmToken();
+  }, []);
+  const getFcmToken = async () => {
+    token = await messaging().getToken();
+    console.log(token);
+  };
+
   const [name, setName] = useState('');
   const [surname, setSurname] = useState('');
   const [email, setEmail] = useState('');
-  const [newpassword, setnewPassword] = useState('');
+  const [password, setPassword] = useState('');
   const [reenterpassword, setreEnterPassword] = useState('');
   const [checkValidEmail, setCheckValidEmail] = useState(false);
-  const [seePassword, setSeePassword] = useState(true);
-  const [seerePassword, setSeerePassword] = useState(true);
+  const [seepassword, setSeePassword] = useState(true);
+  const [seerepassword, setSeerePassword] = useState(true);
   const nameRemove = useRef(null);
   const surnameRemove = useRef(null);
   const emailRemove = useRef(null);
-  const newPasswordRemove = useRef(null);
+  const passwordRemove = useRef(null);
   const reEnteredPasswordRemove = useRef(null);
 
   //This is the function in which the Validation is done User is Added By Provding the details.
   const handleRegister = async () => {
     //It check the details if anyone is blank then it diplay the alert
-    if (!name || !surname || !email || !newpassword || !reenterpassword) {
+    if (!name || !surname || !email || !password || !reenterpassword) {
       alert('Please fill in all fields.');
       return;
     }
 
     //It check the entered password and reentered password is match or not
-    if (newpassword !== reenterpassword) {
-      alert('Passwords do not match.');
+    if (password !== reenterpassword) {
+      alert('passwords do not match.');
       return;
     }
 
     //It check the entered password contains Whitespace or not
     const isNonWhiteSpace = /^\S*$/;
-    if (!isNonWhiteSpace.test(newpassword)) {
+    if (!isNonWhiteSpace.test(password)) {
       alert('Password must not contain Whitespaces.');
       return;
     }
 
     //It checks the entered password contains the uppercase or not
     const isContainsUppercase = /^(?=.*[A-Z]).*$/;
-    if (!isContainsUppercase.test(newpassword)) {
+    if (!isContainsUppercase.test(password)) {
       alert('Password must have at least one Uppercase Character.');
       return;
     }
 
     //It checks the entered password contains the Lowercase or not
     const isContainsLowercase = /^(?=.*[a-z]).*$/;
-    if (!isContainsLowercase.test(newpassword)) {
+    if (!isContainsLowercase.test(password)) {
       alert('Password must have at least one Lowercase Character.');
       return;
     }
 
     //It checks the entered password contains the Number or not
     const isContainsNumber = /^(?=.*[0-9]).*$/;
-    if (!isContainsNumber.test(newpassword)) {
+    if (!isContainsNumber.test(password)) {
       alert('Password must contain at least one Digit.');
       return;
     }
 
     //It checks the entered password contains proper lenght
     const isValidLength = /^.{8,16}$/;
-    if (!isValidLength.test(newpassword)) {
+    if (!isValidLength.test(password)) {
       alert('Password must be 8-16 Characters Long.');
       return;
     }
@@ -76,29 +87,53 @@ const Reg = ({navigation}) => {
     //It checks the entered password contains the symbol or not
     const isContainsSymbol =
       /^(?=.*[~`!@#$%^&*()--+={}\[\]|\\:;"'<>,.?/_₹]).*$/;
-    if (!isContainsSymbol.test(newpassword)) {
+    if (!isContainsSymbol.test(password)) {
       alert('Password must contain at least one Special Symbol.');
       return;
     }
 
-    try {
-      //createUserWithEmailAndPassword is use to create a User in the Firebase app
-      const isUserCreated = await auth().createUserWithEmailAndPassword(
-        email,
-        newpassword,
-      );
-      console.log(isUserCreated);
+    // try {
+    //   //createUserWithEmailAndPassword is use to create a User in the Firebase app
+    //   const isUserCreated = await auth().createUserWithEmailAndPassword(
+    //     email,
+    //     password,
+    //   );
+    //   console.log(isUserCreated);
 
-      //It clears the inputValues after clicking the button
-      nameRemove.current.clear();
-      surnameRemove.current.clear();
-      emailRemove.current.clear();
-      newPasswordRemove.current.clear();
-      reEnteredPasswordRemove.current.clear();
-      alert('SuccessFully Registered');
-    } catch (error) {
-      alert(error);
-    }
+    //It clears the inputValues after clicking the button
+    // nameRemove.current.clear();
+    // surnameRemove.current.clear();
+    // emailRemove.current.clear();
+    // PasswordRemove.current.clear();
+    // reEnteredPasswordRemove.current.clear();
+    // alert('SuccessFully Registered');
+    // } catch (error) {
+    //   alert(error);
+    // }
+
+    // This is the user adding code in the database called the firestore
+    firestore()
+      .collection('Users')
+      .add({
+        name: name,
+        surname: surname,
+        email: email,
+        password: password,
+        reenterpassword: reenterpassword,
+        token: token,
+      })
+      .then(() => {
+        console.log('User Added');
+        nameRemove.current.clear();
+        surnameRemove.current.clear();
+        emailRemove.current.clear();
+        passwordRemove.current.clear();
+        reEnteredPasswordRemove.current.clear();
+        alert('SuccessFully Registered');
+      })
+      .catch(error => {
+        console.log(error);
+      });
   };
 
   //It is the Function of the Validate Email which validate the Email
@@ -173,19 +208,19 @@ const Reg = ({navigation}) => {
           style={styles.TextInput}
           placeholder="Enter New Password"
           placeholderTextColor="#003f5c"
-          secureTextEntry={seePassword}
-          onChangeText={text => setnewPassword(text)}
-          ref={newPasswordRemove}
+          secureTextEntry={seepassword}
+          onChangeText={text => setPassword(text)}
+          ref={passwordRemove}
         />
 
         {/* ---------------------------This is the Icon Button--------------------------------- */}
 
         <TouchableOpacity
           style={styles.wrapperIcon}
-          onPress={() => setSeePassword(!seePassword)}>
+          onPress={() => setSeePassword(!seepassword)}>
           <Image
             source={
-              seePassword
+              seepassword
                 ? require('../../asset/Eye.png')
                 : require('../../asset/EyeActive.png')
             }
@@ -201,7 +236,7 @@ const Reg = ({navigation}) => {
           style={styles.TextInput}
           placeholder="Re Enter Password"
           placeholderTextColor="#003f5c"
-          secureTextEntry={seerePassword}
+          secureTextEntry={seerepassword}
           onChangeText={reenterpassword => setreEnterPassword(reenterpassword)}
           ref={reEnteredPasswordRemove}
         />
@@ -209,10 +244,10 @@ const Reg = ({navigation}) => {
         {/* ---------------------------This is the Icon Button--------------------------------- */}
         <TouchableOpacity
           style={styles.wrapperIcon}
-          onPress={() => setSeerePassword(!seerePassword)}>
+          onPress={() => setSeerePassword(!seerepassword)}>
           <Image
             source={
-              seerePassword
+              seerepassword
                 ? require('../../asset/Eye.png')
                 : require('../../asset/EyeActive.png')
             }
@@ -236,7 +271,7 @@ const Reg = ({navigation}) => {
       {!name ||
       !surname ||
       !email ||
-      !newpassword ||
+      !password ||
       !reenterpassword ||
       checkValidEmail == true ? (
         <TouchableOpacity
