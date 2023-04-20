@@ -10,6 +10,7 @@ import {
 // import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import messaging from '@react-native-firebase/messaging';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 let token = '';
 
 const Reg = ({navigation}) => {
@@ -129,11 +130,17 @@ const Reg = ({navigation}) => {
         emailRemove.current.clear();
         passwordRemove.current.clear();
         reEnteredPasswordRemove.current.clear();
+        saveLocalData();
         alert('SuccessFully Registered');
       })
       .catch(error => {
         console.log(error);
       });
+  };
+
+  const saveLocalData = async () => {
+    await AsyncStorage.setItem('NAME', name);
+    await AsyncStorage.setItem('EMAIL', email);
   };
 
   //It is the Function of the Validate Email which validate the Email
