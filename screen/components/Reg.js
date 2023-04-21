@@ -112,18 +112,23 @@ const Reg = ({navigation}) => {
     // } catch (error) {
     //   alert(error);
     // }
-
+    let id = uuid.v4();
     // This is the user adding code in the database called the firestore
     firestore()
       .collection('Users')
-      .add({
+      .doc(id)
+      .set({
         name: name,
         surname: surname,
         email: email,
         password: password,
         reenterpassword: reenterpassword,
         token: token,
-        userId: uuid.v4(),
+        userId: id,
+        followers: [],
+        posts: [],
+        profilePic: '',
+        bio: '',
       })
       .then(() => {
         console.log('User Added');
