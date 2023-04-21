@@ -7,6 +7,8 @@ import firestore from '@react-native-firebase/firestore';
 let userId = '';
 let comments = [];
 let postId = '';
+let name = '';
+let profile = '';
 const Comment = () => {
   const route = useRoute();
   const [comment, setComment] = useState('');
@@ -23,10 +25,18 @@ const Comment = () => {
 
   const getUserId = async () => {
     userId = await AsyncStorage.getItem('USERID');
+    name = await AsyncStorage.getItem('NAME');
+    profile = await AsyncStorage.getItem('PROFILE_PIC');
   };
   const postComment = () => {
     let tempComments = comments;
-    tempComments.push({userId: userId, comment: comment, postId: postId});
+    tempComments.push({
+      userId: userId,
+      comment: comment,
+      postId: postId,
+      name: name,
+      profile: profile,
+    });
     firestore()
       .collection('Posts')
       .doc(postId)
@@ -35,11 +45,22 @@ const Comment = () => {
       })
       .then(() => {
         console.log('Post updated');
+        getNewComment();
       })
       .catch(error => {
         console.log(error);
       });
     inputRef.current.clear();
+  };
+
+  const getNewComment = () => {
+    firestore
+      .collection('Posts')
+      .doc(postId)
+      .get()
+      .then(documentSnapshot => {
+        setcommentList(documentSnapshot.data().comments);
+      });
   };
   return (
     <View style={styles.mainContainer}>
@@ -51,11 +72,22 @@ const Comment = () => {
         renderItem={({item, index}) => {
           return (
             <View style={styles.commentListContainer}>
-              <Image
-                source={require('../../asset/user.png')}
-                style={styles.commentUserProfile}
-              />
-              <Text style={styles.commentText}>{item.comment}</Text>
+              {item.profile === '' ? (
+                <Image
+                  source={require('../../asset/user.png')}
+                  style={styles.commentUserProfile}
+                />
+              ) : (
+                <Image
+                  source={{uri: item.profile}}
+                  style={styles.commentUserProfile}
+                />
+              )}
+
+              <View>
+                <Text style={styles.commentName}>{item.name}</Text>
+                <Text style={styles.commentText}>{item.comment}</Text>
+              </View>
             </View>
           );
         }}
@@ -124,7 +156,7 @@ const styles = StyleSheet.create({
   commentListContainer: {
     width: '100%',
     flexDirection: 'row',
-    height: 50,
+    height: 60,
     alignItems: 'center',
   },
   commentUserProfile: {
@@ -133,9 +165,15 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     marginTop: 10,
     marginRight: 15,
+    borderRadius: 20,
+  },
+  commentName: {
+    fontSize: 18,
+    fontWeight: '600',
   },
   commentText: {
-    fontSize: 18,
+    marginTop: 5,
+    fontSize: 16,
     fontWeight: '600',
   },
 });
