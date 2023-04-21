@@ -9,10 +9,12 @@ import {
 import React, {useEffect, useState} from 'react';
 import firestore from '@react-native-firebase/firestore';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useNavigation} from '@react-navigation/native';
 
 const Home = () => {
   const [onLickClick, setOnLikeClick] = useState(false);
   const [postData, setPostData] = useState([]);
+  const navigation = useNavigation();
   useEffect(() => {
     getUserId();
     getData();
@@ -112,7 +114,9 @@ const Home = () => {
                     onPress={() => {
                       onLike(item);
                     }}>
-                    <Text style={styles.likeCommentButtonText}>{'0'}</Text>
+                    <Text style={styles.likeCommentButtonText}>
+                      {item.likes.length}
+                    </Text>
                     {getLikeStatus(item.likes) ? (
                       <Image
                         source={require('../../asset/love.png')}
@@ -125,7 +129,14 @@ const Home = () => {
                       />
                     )}
                   </TouchableOpacity>
-                  <TouchableOpacity style={styles.likeCommentButton}>
+                  <TouchableOpacity
+                    style={styles.likeCommentButton}
+                    onPress={() =>
+                      navigation.navigate('Comment', {
+                        postId: item.postId,
+                        comments: item.comments,
+                      })
+                    }>
                     <Text style={styles.likeCommentButtonText}>{'0'}</Text>
                     <Image
                       source={require('../../asset/comment.png')}
