@@ -137,7 +137,9 @@ const Home = () => {
                         comments: item.comments,
                       })
                     }>
-                    <Text style={styles.likeCommentButtonText}>{'0'}</Text>
+                    <Text style={styles.likeCommentButtonText}>
+                      {item.comments.length}
+                    </Text>
                     <Image
                       source={require('../../asset/comment.png')}
                       style={styles.loveCommentIcon}
