@@ -113,7 +113,11 @@ const Login = ({navigation}) => {
                 ' ' +
                 querySnapshot.docs[0]._data.password,
             );
-            goToHome(querySnapshot.docs[0]._data.userId);
+            goToHome(
+              querySnapshot.docs[0]._data.userId,
+              querySnapshot.docs[0]._data.name,
+              querySnapshot.docs[0]._data.profilePic,
+            );
             emailInputRef.current.clear();
             passwordInputRef.current.clear();
           } else {
@@ -128,8 +132,10 @@ const Login = ({navigation}) => {
       });
   };
 
-  const goToHome = async userId => {
+  const goToHome = async (userId, name, profileurl) => {
     await AsyncStorage.setItem('USERID', userId);
+    await AsyncStorage.setItem('NAME', name);
+    await AsyncStorage.setItem('PROFILE_PIC', profileurl);
     navigation.navigate('NavigationScreen');
   };
   return (
