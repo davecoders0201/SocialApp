@@ -4,6 +4,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import Login from './screen/components/Login';
 import Reg from './screen/components/Reg';
 import NavigationScreen from './screen/Screens/NavigationScreen';
+import Comment from './screen/Screens/Comment';
 
 // Create a Reference of the Stack which will display in the screen stack wise
 const Stack = createStackNavigator();
@@ -17,6 +18,7 @@ function App() {
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Reg" component={Reg} />
         <Stack.Screen name="NavigationScreen" component={NavigationScreen} />
+        <Stack.Screen name="Comment" component={Comment} />
       </Stack.Navigator>
     </NavigationContainer>
   );
