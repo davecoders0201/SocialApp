@@ -4,11 +4,13 @@ import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import firestore from '@react-native-firebase/firestore';
 import storage from '@react-native-firebase/storage';
+import {useNavigation} from '@react-navigation/native';
 
 const Profile = () => {
   const [imageData, setImageData] = useState(null);
   const [imagedPicked, setImagePicked] = useState(false);
   const [uploadedPicUrl, setuploadedPicUrl] = useState('');
+  const navigation = useNavigation();
   useEffect(() => {
     getProfileData();
   }, []);
@@ -103,6 +105,12 @@ const Profile = () => {
           {imagedPicked === true ? 'Save Pic' : 'Edit Profile'}
         </Text>
       </TouchableOpacity>
+
+      <TouchableOpacity
+        style={styles.logoutButton}
+        onPress={() => navigation.navigate('Login')}>
+        <Text style={styles.logoutText}>Logout</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -151,6 +159,22 @@ const styles = StyleSheet.create({
     borderColor: '#ff5252',
   },
   editProfileText: {
+    fontSize: 18,
+    fontWeight: '600',
+    color: '#ff5252',
+  },
+  logoutButton: {
+    width: 200,
+    height: 40,
+    borderWidth: 0.2,
+    alignSelf: 'center',
+    borderRadius: 8,
+    marginTop: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderColor: '#ff5252',
+  },
+  logoutText: {
     fontSize: 18,
     fontWeight: '600',
     color: '#ff5252',
