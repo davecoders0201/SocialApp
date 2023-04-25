@@ -1,19 +1,20 @@
-# This is the Social App in the React Native
+# This is the MD Social App in the React Native
 
-### Live-Website
-
-### Hello all
-
-This website was deployed through firebase hosting [Click Here to visit the live page!]
+This Application was deployed through firebase hosting
 
 ## Features
 
 <ul>
   <li>Firebase Authentication</li>
-  <li>Realtime Database</li>
-  <li>Stripe Payments</li>
+  <li>Firebase Database (FireCloud)</li>
   <li>Less Reloading</li>
+  <li>User Registrations</li>
   <li>User Accounts</li>
+  <li>Addind Post</li>
 </ul>
 
-\***\* Note: REAL-TIME DATABASE & STRIPE PAYMENTS WILL BE UPDATED SOON \*\***
+\***\* Note: REAL-TIME DATABASE AND ENHANCED FEAUTURES IS UPDATING SOON \*\***
+
+### Login Page
+
+<Image src="asset/readmeimage/LoginPage.png">
