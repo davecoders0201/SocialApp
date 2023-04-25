@@ -36,32 +36,34 @@ const Search = () => {
       });
   };
 
-  const followUser = item => {
+  const followUser = async item => {
     let tempFollowers = item._data.followers;
-    let tempFollowing = [];
-    firestore()
+    let following = [];
+    await firestore()
       .collection('Users')
       .doc(userId)
       .get()
       .then(snapShot => {
-        tempFollowing = snapShot._data.following;
+        following = snapShot._data.following;
+        console.log('snapdhot:::', following);
+      })
+      .catch(error => {
+        console.log(error);
       });
 
-    if (tempFollowing.length > 0) {
-      tempFollowing.map(item2 => {
+    if (following.length > 0) {
+      following.map(item2 => {
         if (item2 === item._data.userId) {
-          let index2 = tempFollowing.indexOf(item._data.userId);
+          let index2 = following.indexOf(item._data.userId);
           if (index2 > -1) {
-            tempFollowing.splice(index2, 1);
-            console.log('Following Removed ');
+            following.splice(index2, 1);
           }
         } else {
-          tempFollowing.push(item._data.userId);
+          following.push(item._data.userId);
         }
       });
     } else {
-      tempFollowing.push(item._data.userId);
-      console.log('Following added');
+      following.push(item._data.userId);
     }
 
     if (tempFollowers.length > 0) {
@@ -83,7 +85,7 @@ const Search = () => {
       .collection('Users')
       .doc(userId)
       .update({
-        following: tempFollowing,
+        following: following,
       })
       .then(res => {})
       .catch(error => {
