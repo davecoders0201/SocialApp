@@ -136,6 +136,7 @@ const Login = ({navigation}) => {
     await AsyncStorage.setItem('USERID', userId);
     await AsyncStorage.setItem('NAME', name);
     await AsyncStorage.setItem('PROFILE_PIC', profileurl);
+    await AsyncStorage.setItem('EMAIL', email);
     navigation.navigate('NavigationScreen');
   };
   return (
