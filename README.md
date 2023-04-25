@@ -22,3 +22,11 @@ This Application was deployed through firebase hosting
 ### Home Page
 
 <Image src="asset/readmeimage/HomePage.png" widht=500 height=500>
+
+### Search Page
+
+<Image src="asset/readmeimage/SearchPage.png" widht=500 height=500>
+
+### Profile Page
+
+<Image src="asset/readmeimage/ProfilePage.png" widht=500 height=500>
