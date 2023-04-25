@@ -15,6 +15,11 @@ This Application was deployed through firebase hosting
 
 \***\* Note: REAL-TIME DATABASE AND ENHANCED FEAUTURES IS UPDATING SOON \*\***
 
+## To run this Application
+
+<ul>
+<li>First Install the Node Modules</li> ```npm install```
+</ul>
 ### Login Page
 
 <Image src="asset/readmeimage/LoginPage.png" widht=500 height=500>
