@@ -18,8 +18,11 @@ This Application was deployed through firebase hosting
 ## To run this Application
 
 <ul>
-<li>First Install the Node Modules</li> ```npm install```
+<li>First Install the Node Modules</li>  1) npm install
 </ul>
+
+## Preview
+
 ### Login Page
 
 <Image src="asset/readmeimage/LoginPage.png" widht=500 height=500>
