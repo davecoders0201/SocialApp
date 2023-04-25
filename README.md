@@ -1,4 +1,4 @@
-# Amazon Clone Built using React and FireBase
+# This is the Social App in the React Native
 
 ### Live-Website
 
