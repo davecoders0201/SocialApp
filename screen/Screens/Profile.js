@@ -38,6 +38,7 @@ const Profile = () => {
   const openGallery = async () => {
     const result = await launchImageLibrary({mediaType: 'photo'});
     setImageData(result);
+    setImagePicked(true);
     console.log(result);
   };
 
@@ -75,14 +76,14 @@ const Profile = () => {
           />
         ) : imagedPicked === true ? (
           <Image
-            source={{uri: imageData.assets[0].url}}
+            source={{uri: imageData.assets[0].uri}}
             style={styles.profilePhoto}
           />
         ) : uploadProfilePic !== '' ? (
           <Image source={{uri: uploadedPicUrl}} style={styles.profilePhoto} />
         ) : (
           <Image
-            source={{uri: imageData.assets[0].url}}
+            source={{uri: imageData.assets[0].uri}}
             style={styles.profilePhoto}
           />
         )}
@@ -93,7 +94,7 @@ const Profile = () => {
           onPress={() => {
             if (imagedPicked === false) {
               openGallery();
-              setImagePicked(true);
+              // setImagePicked(true);
             } else {
               setuploadedPicUrl(false);
               uploadProfilePic();
