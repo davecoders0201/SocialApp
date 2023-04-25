@@ -45,7 +45,6 @@ const Search = () => {
       .get()
       .then(snapShot => {
         following = snapShot._data.following;
-        console.log('snapdhot:::', following);
       })
       .catch(error => {
         console.log(error);
