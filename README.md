@@ -18,7 +18,8 @@ This Application was deployed through firebase hosting
 ## To run this Application
 
 <ul>
-<li>First Install the Node Modules</li>  1) npm install
+<li>First Install the Node Modules</li>   npm install
+<li>To run the Application in Emulator</li>   npx react-native run-android
 </ul>
 
 ## Preview
