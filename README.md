@@ -17,4 +17,4 @@ This Application was deployed through firebase hosting
 
 ### Login Page
 
-<Image src="asset/readmeimage/LoginPage.png">
+<Image src="asset/readmeimage/LoginPage.png" style={widht:10}>
