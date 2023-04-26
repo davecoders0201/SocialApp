@@ -135,7 +135,7 @@ const NewMessage = () => {
               {...props}
               wrapperStyle={{
                 right: {
-                  backgroundColor: 'orange',
+                  backgroundColor: '#ff5435',
                 },
               }}
             />
