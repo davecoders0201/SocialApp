@@ -3,8 +3,8 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {NavigationContainer} from '@react-navigation/native';
 import Login from './screen/components/Login';
 import Reg from './screen/components/Reg';
-import NavigationScreen from './screen/Screens/NavigationScreen';
-import Comment from './screen/Screens/Comment';
+import NavigationScreen from './screen/tabScreens/NavigationScreen';
+import Comment from './screen/tabScreens/Comment';
 
 // Create a Reference of the Stack which will display in the screen stack wise
 const Stack = createStackNavigator();
