@@ -43,4 +43,4 @@ This Application was deployed through firebase hosting
 
 ### Chat Screen
 
-<Image src="asset/readmeimage/msgfromoneaccount.png" widht=500 height=500> <Image src="asset/readmeimage/msgfromanotheraccount.png" widht=500 height=500>
+<Image src="asset/readmeimage/msgfromoneaccount.png" widht=500 height=500>          <Image src="asset/readmeimage/msgfromanotheraccount.png" widht=500 height=500>
