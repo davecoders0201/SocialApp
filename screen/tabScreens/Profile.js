@@ -182,7 +182,7 @@ const Profile = () => {
                 <TouchableOpacity
                   style={styles.chatButtonFollower}
                   onPress={() => {
-                    navigation.navigate('NewMessage', {
+                    navigation.navigate('NewMessages', {
                       data: {
                         userId: item.userId,
                         name: item.name,
