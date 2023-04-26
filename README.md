@@ -10,7 +10,8 @@ This Application was deployed through firebase hosting
   <li>Less Reloading</li>
   <li>User Registrations</li>
   <li>User Accounts</li>
-  <li>Addind Post</li>
+  <li>Adding Post</li>
+  <li>RealTime Chat Functionality</li>
 </ul>
 
 \***\* Note: REAL-TIME DATABASE AND ENHANCED FEAUTURES IS UPDATING SOON \*\***
