@@ -40,3 +40,7 @@ This Application was deployed through firebase hosting
 ### Profile Page
 
 <Image src="asset/readmeimage/ProfilePage.png" widht=500 height=500>
+
+### Chat Screen
+
+<Image src="asset/readmeimage/msgfromoneaccount.png" widht=500 height=500> <Image src="asset/readmeimage/msgfromanotheraccount.png" widht=500 height=500>
