@@ -1,27 +1,28 @@
 import {
+  View,
+  Text,
   FlatList,
   Image,
-  StyleSheet,
-  Text,
   TouchableOpacity,
-  View,
+  StyleSheet,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import firestore from '@react-native-firebase/firestore';
 let userId = '';
 const Search = () => {
-  const [userList, setUserList] = useState([]);
+  const [usersList, setUsersList] = useState([]);
   const [onFollowClick, setOnFollowClick] = useState(false);
   useEffect(() => {
     getUsers();
   }, [onFollowClick]);
-
   const getUsers = async () => {
-    userId = await AsyncStorage.getItem('USERID');
     let tempUsers = [];
+    userId = await AsyncStorage.getItem('USERID');
     firestore()
       .collection('Users')
+      // Filter results
+      // .where('userId', '==', userId)
       .get()
       .then(querySnapshot => {
         querySnapshot._docs.map(item => {
@@ -29,77 +30,110 @@ const Search = () => {
             tempUsers.push(item);
           }
         });
-        setUserList(tempUsers);
-      })
-      .catch(error => {
-        console.log(error);
+        setUsersList(tempUsers);
       });
   };
 
-  const followUser = async item => {
+  const followUser = item => {
     let tempFollowers = item._data.followers;
     let following = [];
-    await firestore()
+    let name = '';
+    let profilePic = '';
+
+    firestore()
       .collection('Users')
       .doc(userId)
       .get()
-      .then(snapShot => {
-        following = snapShot._data.following;
-      })
-      .catch(error => {
-        console.log(error);
-      });
-
-    if (following.length > 0) {
-      following.map(item2 => {
-        if (item2 === item._data.userId) {
-          let index2 = following.indexOf(item._data.userId);
-          if (index2 > -1) {
-            following.splice(index2, 1);
-          }
+      .then(snapshot => {
+        console.log('my data====>', item);
+        following = snapshot.data().following;
+        name = snapshot.data().name;
+        profilePic = snapshot.data().profilePic;
+        if (following.length > 0) {
+          following.map(item2 => {
+            if (item2.userId == item._data.userId) {
+              let index2 = -1;
+              following.map((x, i) => {
+                if (x.userId == item._data.userId) {
+                  index2 = i;
+                }
+              });
+              if (index2 > -1) {
+                following.splice(index2, 1);
+              } else {
+                following.push({
+                  name: item._data.name,
+                  userId: item._data.userId,
+                  profilePic: item._data.profilePic,
+                });
+              }
+            } else {
+              following.push({
+                name: item._data.name,
+                userId: item._data.userId,
+                profilePic: item._data.profilePic,
+              });
+            }
+          });
         } else {
-          following.push(item._data.userId);
+          following.push({
+            name: item._data.name,
+            userId: item._data.userId,
+            profilePic: item._data.profilePic,
+          });
         }
-      });
-    } else {
-      following.push(item._data.userId);
-    }
+        console.log(following);
+        if (tempFollowers.length > 0) {
+          tempFollowers.map(item1 => {
+            if (item1.userId == userId) {
+              let index = -1;
+              tempFollowers.map((x, i) => {
+                if (x.userId == userId) {
+                  index = i;
+                }
+              });
 
-    if (tempFollowers.length > 0) {
-      tempFollowers.map(item1 => {
-        if (item1 === userId) {
-          let index = tempFollowers.indexOf(userId);
-          if (index > -1) {
-            tempFollowers.splice(index, 1);
-          }
+              if (index > -1) {
+                tempFollowers.splice(index, 1);
+              }
+            } else {
+              tempFollowers.push({
+                name: name,
+                userId: userId,
+                profilePic: profilePic,
+              });
+            }
+          });
         } else {
-          tempFollowers.push(userId);
+          tempFollowers.push({
+            name: name,
+            userId: userId,
+            profilePic: profilePic,
+          });
         }
-      });
-    } else {
-      tempFollowers.push(userId);
-    }
-
-    firestore()
-      .collection('Users')
-      .doc(userId)
-      .update({
-        following: following,
+        firestore()
+          .collection('Users')
+          .doc(item._data.userId)
+          .update({
+            followers: tempFollowers,
+          })
+          .then(res => {})
+          .catch(error => {
+            console.log(error);
+          });
+        firestore()
+          .collection('Users')
+          .doc(userId)
+          .update({
+            following: following,
+          })
+          .then(res => {})
+          .catch(error => {
+            console.log(error);
+          });
       })
-      .then(res => {})
       .catch(error => {
-        console.log(error);
-      });
-
-    firestore()
-      .collection('Users')
-      .doc(item._data.userId)
-      .update({
-        followers: tempFollowers,
-      })
-      .then(res => {})
-      .catch(error => {
-        console.log(error);
+        console.log;
       });
 
     setOnFollowClick(!onFollowClick);
@@ -108,8 +142,9 @@ const Search = () => {
 
   const getFollowStatus = followers => {
     let status = false;
+
     followers.map(item => {
-      if (item === userId) {
+      if (item.userId == userId) {
         status = true;
       } else {
         status = false;
@@ -120,14 +155,14 @@ const Search = () => {
   return (
     <View style={styles.mainContainer}>
       <FlatList
-        data={userList}
+        data={usersList}
         renderItem={({item, index}) => {
           return (
             <View style={styles.userListMainContainer}>
               <View style={styles.userListContainer}>
                 <Image
                   source={
-                    item._data.profilePic === ''
+                    item._data.profilePic == ''
                       ? require('../../asset/user.png')
                       : {uri: item._data.profilePic}
                   }
@@ -154,8 +189,6 @@ const Search = () => {
   );
 };
 
-export default Search;
-
 const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
@@ -163,10 +196,10 @@ const styles = StyleSheet.create({
   userListMainContainer: {
     width: '100%',
     height: 70,
+    backgroundColor: '#fff',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: '#fff',
   },
   userListContainer: {
     flexDirection: 'row',
@@ -176,8 +209,8 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20,
-    marginRight: 20,
-    marginLeft: 10,
+    marginLeft: 20,
+    marginRight: 10,
   },
   userName: {
     fontSize: 18,
@@ -193,7 +226,8 @@ const styles = StyleSheet.create({
   },
   followButtonText: {
     color: '#fff',
-    marginRight: 10,
     marginLeft: 10,
+    marginRight: 10,
   },
 });
+export default Search;
