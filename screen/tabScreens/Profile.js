@@ -28,7 +28,7 @@ const Profile = () => {
   }, []);
 
   const getProfileData = async () => {
-    const userId = await AsyncStorage.getItem('USERID');
+    userId = await AsyncStorage.getItem('USERID');
     firestore()
       .collection('Users')
       .doc(userId)
