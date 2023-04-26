@@ -6,7 +6,6 @@ import Reg from './screen/components/Reg';
 import NavigationScreen from './screen/tabScreens/NavigationScreen';
 import Comment from './screen/externalScreens/Comment';
 import NewMessages from './screen/externalScreens/NewMessages';
-import Messages from './screen/externalScreens/Messages';
 
 // Create a Reference of the Stack which will display in the screen stack wise
 const Stack = createStackNavigator();
@@ -22,7 +21,6 @@ function App() {
         <Stack.Screen name="NavigationScreen" component={NavigationScreen} />
         <Stack.Screen name="Comment" component={Comment} />
         <Stack.Screen name="NewMessages" component={NewMessages} />
-        <Stack.Screen name="Messages" component={Messages} />
       </Stack.Navigator>
     </NavigationContainer>
   );
