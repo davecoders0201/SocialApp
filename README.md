@@ -16,12 +16,22 @@ This Application was deployed through firebase hosting
 
 \***\* Note: REAL-TIME DATABASE AND ENHANCED FEAUTURES IS UPDATING SOON \*\***
 
-## To run this Application
+## How to run the app ?
 
-<ul>
-<li>First Install the Node Modules</li>   npm install
-<li>To run the Application in Emulator</li>   npx react-native run-android
-</ul>
+1. Open the project in your favorite text editor
+2. Open your terminal or cmd and type
+
+```
+npm install
+```
+
+1. And the last just type in your terminal or cmd
+
+```
+react-native run-android
+```
+
+be sure if you connected with a device on debugging mode or use the emulator on debugging mode too.
 
 ## Preview
 
