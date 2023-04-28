@@ -2,6 +2,27 @@
 
 This Application was deployed through firebase hosting
 
+## Introduction
+
+[![React Native](https://img.shields.io/badge/React%20Native-v0.71-blue.svg?style=rounded-square)](https://facebook.github.io/react-native/)
+[![Node.js](https://img.shields.io/badge/Node.js-v18.16-green.svg?style=rounded-square)](https://nodejs.org/)
+[![Firebase](https://img.shields.io/badge/firebase-v9.20.0-blue.svg?style=rounded-square)](https://firebase.google.com/)
+
+### What is React Native ?
+
+React Native is an open-source mobile application framework created by Facebook. It is used to develop applications for Android, iOS and UWP by enabling developers to use React along with native platform capabilities. [[1]](https://en.wikipedia.org/wiki/React_Native)
+
+### Why using React Native ?
+
+6 main reason why me using React Native for make a mobile app :
+
+1. It's got iOS and Android covered
+2. Reusable components allow hybrid apps to render natively
+3. Apply React Native UI component to an existing app's code-without any rewriting at all
+4. It’s one of the top mobile JavaScript frameworks among developers—and growing
+5. React Native is all about the UI
+6. Native app development is much more efficient
+
 ## Features
 
 <ul>
