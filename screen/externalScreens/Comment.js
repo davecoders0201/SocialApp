@@ -120,6 +120,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
   },
+
   headerContainer: {
     width: '100%',
     height: 60,
@@ -128,11 +129,13 @@ const styles = StyleSheet.create({
     borderBottomColor: '#8e8e8e',
     alignItems: 'center',
   },
+
   headerText: {
     marginLeft: 10,
     fontSize: 18,
     fontWeight: '600',
   },
+
   writeCommentContainer: {
     width: '100%',
     height: 60,
@@ -143,22 +146,26 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
+
   commentTextInput: {
     width: '80%',
     marginLeft: 20,
     fontWeight: '600',
   },
+
   sendText: {
     marginRight: 10,
     fontSize: 18,
     fontWeight: '600',
   },
+
   commentListContainer: {
     width: '100%',
     flexDirection: 'row',
     height: 60,
     alignItems: 'center',
   },
+
   commentUserProfile: {
     width: 40,
     height: 40,
@@ -167,10 +174,12 @@ const styles = StyleSheet.create({
     marginRight: 15,
     borderRadius: 20,
   },
+
   commentName: {
     fontSize: 18,
     fontWeight: '600',
   },
+
   commentText: {
     marginTop: 5,
     fontSize: 16,

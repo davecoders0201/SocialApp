@@ -146,6 +146,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
   },
+
   headerContainer: {
     width: '100%',
     height: 60,
@@ -155,18 +156,22 @@ const styles = StyleSheet.create({
     borderBottomWidth: 0.5,
     borderBottomColor: '#8e8e8e',
   },
+
   postText: {
     marginLeft: 20,
     fontSize: 20,
     color: '#000',
   },
+
   captionStyle: {
     width: '70%',
   },
+
   uploadText: {
     marginRight: 20,
     fontSize: 18,
   },
+
   imageContainer: {
     width: '90%',
     alignSelf: 'center',
@@ -177,12 +182,14 @@ const styles = StyleSheet.create({
     borderWidth: 0.2,
     flexDirection: 'row',
   },
+
   postImage: {
     width: 50,
     height: 50,
     borderRadius: 10,
     margin: 10,
   },
+
   cameraGalleryButton: {
     width: '100%',
     marginTop: 30,
@@ -192,11 +199,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
+
   cameraGalleryIcon: {
     width: 24,
     height: 24,
     marginLeft: 20,
   },
+
   cameraGalleryButtonText: {
     marginLeft: 15,
     fontVariant: 'bold',

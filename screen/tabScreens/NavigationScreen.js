@@ -139,6 +139,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
   },
+
   container: {
     position: 'absolute',
     bottom: 0,
@@ -149,6 +150,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: '#fff',
   },
+
   navigationButton: {
     width: '20%',
     height: '100%',

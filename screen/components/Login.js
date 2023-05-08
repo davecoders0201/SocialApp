@@ -234,6 +234,7 @@ const styles = StyleSheet.create({
     height,
     width,
   },
+
   image: {
     marginTop: -200,
     height: 500,
@@ -242,6 +243,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+
   inputView: {
     backgroundColor: 'transparent',
     borderWidth: 1,
@@ -251,6 +253,7 @@ const styles = StyleSheet.create({
     height: 45,
     marginBottom: 20,
   },
+
   TextInput: {
     height: 50,
     flex: 1,
@@ -259,15 +262,18 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
   },
+
   wrapperIcon: {
     position: 'absolute',
     right: 0,
     padding: 10,
   },
+
   icon: {
     width: 32,
     height: 26,
   },
+
   forgot_button: {
     height: 30,
     marginTop: 20,
@@ -275,6 +281,7 @@ const styles = StyleSheet.create({
     fontSize: 17,
     fontWeight: 'bold',
   },
+
   loginBtn: {
     width: '40%',
     borderRadius: 15,
@@ -286,6 +293,7 @@ const styles = StyleSheet.create({
     fontSize: 200,
     fontWeight: 'bold',
   },
+
   disableLoginBtn: {
     width: '40%',
     borderRadius: 15,
@@ -296,6 +304,7 @@ const styles = StyleSheet.create({
     fontSize: 200,
     backgroundColor: 'grey',
   },
+
   TextStyle: {
     color: 'black',
     textAlign: 'center',
@@ -304,6 +313,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     padding: 10,
   },
+
   registerTextStyle: {
     color: '#ff5435',
     textAlign: 'center',

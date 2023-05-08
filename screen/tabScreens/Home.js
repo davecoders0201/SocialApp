@@ -165,6 +165,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
   },
+
   headerContainer: {
     justifyContent: 'center',
     paddingLeft: 20,
@@ -172,11 +173,13 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 60,
   },
+
   headerText: {
     fontSize: 20,
     fontWeight: 700,
     color: '#000',
   },
+
   flatListPost: {
     width: '90%',
     // height: 200,
@@ -185,6 +188,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderRadius: 20,
   },
+
   imagePost: {
     width: '90%',
     height: 120,
@@ -192,28 +196,33 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginBottom: 20,
   },
+
   userContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     marginTop: 10,
   },
+
   userImage: {
     width: 40,
     height: 40,
     borderRadius: 20,
     marginLeft: 15,
   },
+
   userName: {
     fontSize: 18,
     marginLeft: 15,
     fontWeight: '600',
   },
+
   captionText: {
     marginTop: 10,
     marginLeft: 20,
     marginRight: 20,
     marginBottom: 10,
   },
+
   likeCommentButtonContainer: {
     flexDirection: 'row',
     width: '100%',
@@ -222,16 +231,20 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     alignItems: 'center',
   },
+
   likeCommentButton: {
     flexDirection: 'row',
   },
+
   likeCommentButtonText: {
     marginRight: 10,
   },
+
   loveCommentIcon: {
     width: 24,
     height: 24,
   },
+
   postNotFound: {
     flex: 1,
     justifyContent: 'center',

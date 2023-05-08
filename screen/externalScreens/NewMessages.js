@@ -152,6 +152,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     height: 50,
   },
+
   selectedImageContainer: {
     width: 40,
     height: 40,
@@ -159,12 +160,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     marginRight: 10,
   },
+
   selectedImage: {
     width: 40,
     height: 40,
     borderRadius: 10,
     position: 'absolute',
   },
+
   closeIcon: {
     width: 10,
     height: 10,
@@ -172,13 +175,16 @@ const styles = StyleSheet.create({
     marginLeft: 5,
     marginTop: 5,
   },
+
   openCameraButton: {
     marginRight: 20,
   },
+
   openCameraImage: {
     width: 24,
     height: 24,
   },
+
   sendIcon: {
     width: 24,
     height: 24,

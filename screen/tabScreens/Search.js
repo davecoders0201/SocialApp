@@ -193,6 +193,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
   },
+
   userListMainContainer: {
     width: '100%',
     height: 70,
@@ -201,10 +202,12 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
+
   userListContainer: {
     flexDirection: 'row',
     alignItems: 'center',
   },
+
   profilePic: {
     width: 40,
     height: 40,
@@ -212,10 +215,12 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     marginRight: 10,
   },
+
   userName: {
     fontSize: 18,
     fontWeight: '600',
   },
+
   followButton: {
     marginRight: 20,
     backgroundColor: '#0099ff',
@@ -224,6 +229,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+
   followButtonText: {
     color: '#fff',
     marginLeft: 10,

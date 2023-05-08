@@ -247,6 +247,7 @@ const styles = StyleSheet.create({
   mainContainer: {
     flex: 1,
   },
+
   headerContainer: {
     width: '100%',
     height: 60,
@@ -255,11 +256,13 @@ const styles = StyleSheet.create({
     borderBottomColor: '#8e8e8e',
     alignItems: 'center',
   },
+
   headerText: {
     marginLeft: 10,
     fontSize: 18,
     fontWeight: '600',
   },
+
   profilePhotoButton: {
     width: 100,
     height: 100,
@@ -268,11 +271,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+
   profilePhoto: {
     width: 100,
     height: 100,
     borderRadius: 10,
   },
+
   editProfileButton: {
     width: 200,
     height: 40,
@@ -284,11 +289,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderColor: '#ff5252',
   },
+
   editProfileText: {
     fontSize: 18,
     fontWeight: '600',
     color: '#ff5252',
   },
+
   followerFollowingContainer: {
     width: '100%',
     height: 60,
@@ -297,18 +304,21 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginTop: 30,
   },
+
   followerButton: {
     width: '50%',
     height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
   },
+
   followingButton: {
     width: '50%',
     height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
   },
+
   userMainContainerFollower: {
     width: '100%',
     height: 70,
@@ -317,10 +327,12 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
+
   userContainerFollower: {
     flexDirection: 'row',
     alignItems: 'center',
   },
+
   userProfilePhotoFollower: {
     width: 40,
     height: 40,
@@ -328,18 +340,22 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     marginRight: 10,
   },
+
   userNameFollower: {
     fontSize: 18,
     fontWeight: '600',
   },
+
   chatButtonFollower: {
     marginRight: 20,
   },
+
   chatIconFollower: {
     width: 24,
     height: 24,
     tintColor: 'orange',
   },
+
   userMainContainerFollowing: {
     width: '100%',
     height: 70,
@@ -348,10 +364,12 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
+
   userContainerFollowing: {
     flexDirection: 'row',
     alignItems: 'center',
   },
+
   userProfilePhotoFollowing: {
     width: 40,
     height: 40,
@@ -359,13 +377,16 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     marginRight: 10,
   },
+
   userNameFollowing: {
     fontSize: 18,
     fontWeight: '600',
   },
+
   chatButtonFollowing: {
     marginRight: 20,
   },
+
   chatIconFollowing: {
     width: 24,
     height: 24,
